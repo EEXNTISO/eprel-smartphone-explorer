@@ -1,5 +1,7 @@
 [English](#english) | [Français](#français)
 
+**Live Demo:** **https://eexntiso.github.io/eprel-smartphone-explorer/**
+
 ![readme](https://github.com/user-attachments/assets/25631379-c707-4b1f-b935-f978e32e256c)
 
 
@@ -10,10 +12,6 @@
 ### 📱 EPREL Smartphone Explorer
 
 An interactive, single-file web application to explore, filter, sort, and visualize the EU's EPREL database for smartphones. This tool provides an easy-to-use interface to analyze data on energy efficiency and repairability scores for a wide range of devices.
-
-**Live Demo:** **https://eexntiso.github.io/eprel-smartphone-explorer/**
-
-
 
 ### ✨ Features
 
@@ -43,10 +41,6 @@ This tool uses data provided by the European Product Registry for Energy Labelli
 ### 📱 EPREL Smartphone Explorer
 
 Une application web interactive, contenue dans un seul fichier, pour explorer, filtrer, trier et visualiser la base de données EPREL de l'Union Européenne pour les smartphones. Cet outil offre une interface simple pour analyser les données d'efficacité énergétique et les indices de réparabilité sur un large éventail d'appareils.
-
-**Démonstration en ligne :** **https://eexntiso.github.io/eprel-smartphone-explorer/**
-
-
 
 ### ✨ Fonctionnalités
 
