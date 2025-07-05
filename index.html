@@ -200,7 +200,7 @@
         <div id="visualization-panel">
             <div class="visualization-header">
                 <h2 data-translate-key="vizTitle"></h2>
-                <button class="close-btn" onclick="hideVisualizations()">&times;</button>
+                <button class="close-btn" onclick="hideVisualizations()">×</button>
             </div>
             <div class="charts-grid">
                 <div id="repair-class-chart" class="chart-container"></div>
@@ -217,7 +217,6 @@
             fr: { docTitle: "Base de données EPREL Smartphones", mainTitle: "📱 Base de données EPREL Smartphones", subTitle: "Explorez les données de réparabilité et d'efficacité énergétique des smartphones", attribution: `Données issues de la <a href="${eprelUrl}" target="_blank" rel="noopener noreferrer">base EPREL de l'UE</a> (licence CC BY 4.0).`, loading: "Chargement des données...", errorTitle: "Erreur de chargement", errorMsg: "Impossible de charger le fichier CSV. Assurez-vous que le fichier eprel_smartphones_tous_les_modeles.csv est présent dans le même répertoire que cette page HTML.", supplierLabel: "Marque/Fournisseur", supplierPlaceholder: "Filtrer par marque...", modelLabel: "Modèle", modelPlaceholder: "Filtrer par modèle...", energyClassLabel: "Classe énergétique", allEnergy: "Toutes", repairClassLabel: "Classe de réparabilité", allRepair: "Toutes", osLabel: "Système d'exploitation", allOs: "Tous", foldableLabel: "Pliable", allFoldable: "Tous", yes: "Oui", no: "Non", clearFilters: "Effacer les filtres", noResults: "Aucun résultat trouvé", visualizeBtn: "📊 Visualiser", vizTitle: "Visualisation des Données Filtrées", vizRepairClass: "Répartition par Classe de Réparabilité", vizEnergyClass: "Répartition par Classe Énergétique", vizOs: "Répartition des Systèmes d'Exploitation", vizBatteryReplaceable: "Batterie Remplaçable par l'Utilisateur", statTotal: "Smartphones", statDisplayed: "Affichés", statAvgRepair: "Réparabilité moy.", statAvgBattery: "Batterie moy. (mAh)", colSupplier: "Marque/Fournisseur", colModel: "Modèle", colEprel: "N° EPREL", colEnergy: "Classe énergétique", colRepairClass: "Classe réparabilité", colRepairIndex: "Indice réparabilité", colMarketDate: "Date de mise sur le marché", colGuarantee: "Garantie (mois)", colUpdates: "MAJ logiciel (ans)", colBattery: "Capacité batterie (mAh)", colBatteryEndurance: "Endurance batterie/cycle", colBatteryCycles: "Endurance en cycles", colBatteryPdf: "Cycles batterie PDF", colBatteryReplaceable: "Batterie remplaçable", colChargerPower: "Puissance chargeur (W)", colConnector: "Type connecteur", colOsTh: "OS", colFoldable: "Pliable", colIp: "Indice protection", colIpSolid: "Protection solide", colIpWater: "Protection eau", colImmersion: "Profondeur immersion", colScratch: "Résistance écran", colFallClass: "Classe chute", colFalls: "Chutes sans défaut", colScoreDisassembly: "Score démontage", colScoreFasteners: "Score fixations", colScoreTools: "Score outils", colScoreParts: "Score pièces", colScoreInfo: "Score infos réparation", colLinkInstructions: "Lien instructions", colLinkParts: "Lien pièces détachées", },
             en: { docTitle: "EPREL Smartphone Database", mainTitle: "📱 EPREL Smartphone Database", subTitle: "Explore repairability and energy efficiency data for smartphones", attribution: `Data from the <a href="${eprelUrl}" target="_blank" rel="noopener noreferrer">EU EPREL database</a> (CC BY 4.0 license).`, loading: "Loading data...", errorTitle: "Loading Error", errorMsg: "Could not load the CSV file. Make sure the file eprel_smartphones_tous_les_modeles.csv is in the same directory as this HTML page.", supplierLabel: "Supplier/Trademark", supplierPlaceholder: "Filter by brand...", modelLabel: "Model", modelPlaceholder: "Filter by model...", energyClassLabel: "Energy Class", allEnergy: "All", repairClassLabel: "Repairability Class", allRepair: "All", osLabel: "Operating System", allOs: "All", foldableLabel: "Foldable", allFoldable: "All", yes: "Yes", no: "No", clearFilters: "Clear Filters", noResults: "No results found", visualizeBtn: "📊 Visualize", vizTitle: "Filtered Data Visualization", vizRepairClass: "Distribution by Repairability Class", vizEnergyClass: "Distribution by Energy Class", vizOs: "Operating System Distribution", vizBatteryReplaceable: "User-Replaceable Battery", statTotal: "Smartphones", statDisplayed: "Displayed", statAvgRepair: "Avg. Repairability", statAvgBattery: "Avg. Battery (mAh)", colSupplier: "Supplier/Trademark", colModel: "Model", colEprel: "EPREL No.", colEnergy: "Energy Class", colRepairClass: "Repairability Class", colRepairIndex: "Repairability Index", colMarketDate: "Market Start Date", colGuarantee: "Guarantee (months)", colUpdates: "Software Updates (yrs)", colBattery: "Battery Capacity (mAh)", colBatteryEndurance: "Battery Endurance/cycle", colBatteryCycles: "Battery Endurance (cycles)", colBatteryPdf: "Battery Cycles (PDF)", colBatteryReplaceable: "User Replaceable Battery", colChargerPower: "Charger Power (W)", colConnector: "Connector Type", colOsTh: "OS", colFoldable: "Foldable", colIp: "IP Rating", colIpSolid: "Solid Protection", colIpWater: "Water Protection", colImmersion: "Immersion Depth", colScratch: "Screen Scratch Resistance", colFallClass: "Drop Class", colFalls: "Falls Without Defect", colScoreDisassembly: "Disassembly Score", colScoreFasteners: "Fasteners Score", colScoreTools: "Tools Score", colScoreParts: "Spare Part Score", colScoreInfo: "Repair Info Score", colLinkInstructions: "Instructions Link", colLinkParts: "Spare Parts Link", }
         };
-        // MODIFICATION: Palette de couleurs sémantiques
         const semanticColors = { 'A': '#22c55e', 'B': '#84cc16', 'C': '#eab308', 'D': '#f59e0b', 'E': '#f97316', 'F': '#ef4444', 'G': '#dc2626', 'N/A': '#9ca3af' };
         
         let allData = [], filteredData = [], sortState = { key: 'supplierOrTrademark', direction: 'asc' }, currentLang = 'fr';
@@ -228,9 +227,11 @@
                 const key = el.dataset.translateKey;
                 if (dict[key]) {
                     const translationText = dict[key]; const hasArrow = el.querySelector('.sort-arrow');
-                    if (hasArrow) { el.firstChild.nodeValue = translationText; } 
-                    else if (translationText.includes('<a')) { el.innerHTML = translationText; }
-                    else { el.textContent = translationText; }
+                    if (hasArrow) {
+                        if (el.firstChild && el.firstChild.nodeType === Node.TEXT_NODE) { el.firstChild.nodeValue = translationText; }
+                        else { el.insertBefore(document.createTextNode(translationText), hasArrow); }
+                    } else if (translationText.includes('<a')) { el.innerHTML = translationText;
+                    } else { el.textContent = translationText; }
                 }
             });
             document.querySelectorAll('[data-translate-key-placeholder]').forEach(el => { const key = el.dataset.translateKeyPlaceholder; if (dict[key]) { el.placeholder = dict[key]; } });
@@ -278,10 +279,8 @@
         function updateSortArrows() {
             document.querySelectorAll('#dataTable th[data-key]').forEach(th => {
                 const arrow = th.querySelector('.sort-arrow');
-                if(!arrow) { th.appendChild(document.createElement('span')).className = 'sort-arrow'; }
-                const currentArrow = th.querySelector('.sort-arrow');
-                th.firstChild.nodeValue = translations[currentLang][th.dataset.translateKey] || th.dataset.translateKey;
-                if (th.dataset.key === sortState.key) { th.classList.add('sorted'); currentArrow.textContent = sortState.direction === 'asc' ? '↑' : '↓'; } else { th.classList.remove('sorted'); currentArrow.textContent = '↕'; }
+                if (th.dataset.key === sortState.key) { th.classList.add('sorted'); arrow.textContent = sortState.direction === 'asc' ? '↑' : '↓'; } 
+                else { th.classList.remove('sorted'); arrow.textContent = '↕'; }
             });
         }
 
@@ -326,7 +325,6 @@
 
         const countOccurrences = (data, key) => data.reduce((acc, item) => { const val = item[key] || 'N/A'; acc[val] = (acc[val] || 0) + 1; return acc; }, {});
         
-        // MODIFICATION: La fonction de création de graphiques est maintenant plus intelligente
         function createPieChart(container, title, data, options = {}) {
             const { labelsMap = {}, colorPalette = {} } = options;
             const total = Object.values(data).reduce((sum, val) => sum + val, 0);
@@ -349,7 +347,6 @@
 
         function showVisualizations() {
             const dict = translations[currentLang];
-            // Utilisation de la nouvelle fonction avec les palettes de couleurs
             createPieChart(document.getElementById('repair-class-chart'), dict.vizRepairClass, countOccurrences(filteredData, 'repairabilityClass'), { colorPalette: semanticColors });
             createPieChart(document.getElementById('energy-class-chart'), dict.vizEnergyClass, countOccurrences(filteredData, 'energyClass'), { colorPalette: semanticColors });
             createPieChart(document.getElementById('os-chart'), dict.vizOs, countOccurrences(filteredData, 'operatingSystem'));
