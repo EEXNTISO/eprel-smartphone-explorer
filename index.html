@@ -64,7 +64,6 @@
         .no-results, .error { text-align: center; padding: 40px; color: #6b7280; }
         .error { background: #fee2e2; color: #991b1b; margin: 20px; border-radius: 8px; border: 1px solid #fecaca; }
         #content { display: flex; flex-direction: column; flex: 1; min-height: 0; }
-        /* --- Styles pour la section de visualisation --- */
         #visualization-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 1000; display: none; align-items: center; justify-content: center; backdrop-filter: blur(5px); }
         #visualization-panel { background: #f8fafc; border-radius: 15px; padding: 20px; width: 90%; max-width: 1200px; height: 90%; display: flex; flex-direction: column; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25); }
         .visualization-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #e2e8f0; padding-bottom: 15px; margin-bottom: 20px; }
@@ -79,7 +78,6 @@
         .pie-legend { display: flex; flex-direction: column; gap: 8px; }
         .legend-item { display: flex; align-items: center; font-size: 0.9rem; }
         .legend-color { width: 15px; height: 15px; border-radius: 3px; margin-right: 8px; flex-shrink: 0; }
-        
         @media (max-width: 900px) {
             body { height: auto; min-height: 100vh; overflow-y: auto; padding: 10px; }
             .container { height: auto; padding-bottom: 20px; }
@@ -221,6 +219,20 @@
         
         let allData = [], filteredData = [], sortState = { key: 'supplierOrTrademark', direction: 'asc' }, currentLang = 'fr';
 
+        // CORRECTION: La fonction de peuplement des listes a été corrigée et séparée
+        function populateSelectOptions(selectElement, allKey, options) {
+            const currentValue = selectElement.value;
+            const dict = translations[currentLang];
+            selectElement.innerHTML = `<option value="">${dict[allKey]}</option>`;
+            options.forEach(option => {
+                const optionElement = document.createElement('option');
+                optionElement.value = option;
+                optionElement.textContent = option;
+                selectElement.appendChild(optionElement);
+            });
+            selectElement.value = currentValue;
+        }
+
         function setLanguage(lang) {
             currentLang = lang; document.documentElement.lang = lang; const dict = translations[lang];
             document.querySelectorAll('[data-translate-key]').forEach(el => {
@@ -235,13 +247,13 @@
                 }
             });
             document.querySelectorAll('[data-translate-key-placeholder]').forEach(el => { const key = el.dataset.translateKeyPlaceholder; if (dict[key]) { el.placeholder = dict[key]; } });
-            document.querySelectorAll('select').forEach(select => {
-                const firstOption = select.querySelector('option[value=""]');
-                if (firstOption && firstOption.dataset.translateKey) {
-                    const key = firstOption.dataset.translateKey;
-                    if(dict[key]) firstOption.textContent = dict[key];
-                }
-            });
+            
+            // CORRECTION: Peupler et traduire les listes
+            populateSelectOptions(document.getElementById('energyClassFilter'), 'allEnergy', [...new Set(allData.map(item => item.energyClass).filter(Boolean))].sort());
+            populateSelectOptions(document.getElementById('repairabilityClassFilter'), 'allRepair', [...new Set(allData.map(item => item.repairabilityClass).filter(Boolean))].sort());
+            populateSelectOptions(document.getElementById('operatingSystemFilter'), 'allOs', [...new Set(allData.map(item => item.operatingSystem).filter(Boolean))].sort());
+            document.querySelectorAll('#foldableFilter [data-translate-key]').forEach(el => { el.textContent = dict[el.dataset.translateKey]; });
+
             document.title = dict.docTitle; renderTable();
         }
 
@@ -356,7 +368,7 @@
         function hideVisualizations() { document.getElementById('visualization-overlay').style.display = 'none'; }
         
         function setupEventListeners() {
-            document.querySelectorAll('.filter-group select, .filter-group input').forEach(el => el.addEventListener('change', applyFilters));
+            document.querySelectorAll('.filter-group select').forEach(el => el.addEventListener('change', applyFilters));
             document.getElementById('supplierFilter').addEventListener('input', applyFilters); document.getElementById('modelFilter').addEventListener('input', applyFilters);
             document.querySelectorAll('#dataTable th[data-key]').forEach(th => {
                 const arrow = document.createElement('span'); arrow.className = 'sort-arrow';
